@@ -1,13 +1,25 @@
+import React from "react";
 import "./styles.css";
 
-export default function App() {
+const Title = () => <h3>Total Click : 0</h3>;
+const Button = () => <button>Click Me</button>;
+const Container = () => {
   return (
-    <div className="App">
-      <h3 id="title" onMouseEnter={() => alert("Hello")}>
-        Hello
-      </h3>
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+    <div>
+      <Title />
+      <Button />
     </div>
   );
-}
+};
+export default () => {
+  const [counter, setCounter] = React.useState(0);
+  const onClick = () => {
+    setCounter(counter + 1);
+  };
+  return (
+    <div>
+      <h3>Total Count {counter}</h3>
+      <button onClick={onClick}>Click me!</button>
+    </div>
+  );
+};
