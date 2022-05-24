@@ -1,28 +1,21 @@
 //npx create-react-app@5.0.0 my-app
 
 import React from "react";
-
-export default () => {
-  const [loading, setLoading] = React.useState(true);
-  const [coins, setCoins] = React.useState([]);
-  React.useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
-      .then((res) => res.json())
-      .then((json) => setCoins(json));
-    setLoading(false);
-  }, []);
+import Home from "./routes/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Detail from "./routes/Detail";
+import { Link } from "react-router-dom";
+const App = () => {
   return (
-    <div>
-      <h1>The Coins!</h1>
-      {loading ? (
-        <strong>Loading...</strong>
-      ) : (
-        <ul>
-          {coins.map((coin, index) => (
-            <li key={index}>{coin.name}</li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <Router>
+      <Link to="/">Home</Link>
+      <Routes>
+        <Route path="/movie/:id" element={<Detail />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="*" element={<h1>Not Found</h1>}></Route>
+      </Routes>
+    </Router>
   );
 };
+
+export default App;
